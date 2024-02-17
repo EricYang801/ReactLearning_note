@@ -1,0 +1,42 @@
+<!DOCTYPE html> <!--html5 -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to React</title> <!--標籤頁名稱 -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!--全稱、簡介關鍵字、作者、網站、版權、編碼、網頁標題、CSS樣式、SEO優化、預覽-->
+</head>
+
+<body>
+    <!-- Create an element in the div#root > div#one > p > "This a p tag text!", "Another Text!" -->
+    <!--div#root that means div id="root"-->
+    <div id="root"></div> <!-- id is a propertie for div-->
+    <!--
+<div id="root"> 
+    <div id="one">
+        <p>
+            "This a p tag text!"
+            "Another Text!"
+        </p>
+        p的用意是段落，所以會自動換行
+        br是強制換行，一般來說不建議使用
+    </div>
+</div>
+-->
+</body>
+<script>
+    // Create an element in the div#root > div#one > p > "This a p tag text!", "Another Text!"
+    // Note: React.createElement() returns an object of type ReactElement (virtual DOM) which is not rendered yet.
+    // The createElement() method passes the element's type, its properties, and its children to create the ReactElement.
+    // For example, React.createElement('element name', {"property name": "property value"}, child element 1, child element 2, ...);
+    const p = React.createElement('p', null, 'This a p tag text!', 'Another Text!');
+    const divOne = React.createElement('div', { "id": "one" }, p); //把p放進divOne
+
+    // Render the element in the div#root
+    const divRoot = ReactDOM.createRoot(document.getElementById('root')); //需要建立根節點 
+    divRoot.render(divOne); //渲染時要調用render function
+</script>
+
+</html>

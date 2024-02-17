@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Inject Data in JSX</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script type="text/babel">
+    const user = {
+        name: "John Doe",
+        age: 25
+    };
+
+    const textStyle = {
+        color: "red",
+        fontSize: "20px"
+    };
+
+    // Note: You can use JavaScript expression inside JSX by wrapping it in curly braces ({}).
+
+    // Problem: Where can you use JavaScript expression inside JSX?
+    // Answer: You can use JavaScript expression inside JSX in the
+    // 1. Element properties, this is used to control the element's properties.
+    // 2. Children (node), this is mostly used to render dynamic data.
+
+    // Problem: What can be written inside the curly braces ({})?
+    // Answer: You can write any valid JavaScript expression inside the curly braces ({}).
+    // JavaScript's expression is a valid JavaScript code that can be evaluated to a value.
+    // Is expression: Variable, Constant, String, Array, Object, Function, Function call, Calculation, etc.
+    // Not expression: If statement, For loop, While loop, Switch case, Declaration, etc.
+    // 問題：您可以在 JSX 的哪些地方使用 JavaScript 表達式？
+    // 答案：您可以在以下 JSX 的地方使用 JavaScript 表達式：
+    // 1. 元素屬性，這主要用於控制元素的屬性。
+    // 2. 子節點（node），這主要用於渲染動態數據。
+
+    // 問題：可以在大括號 ({}) 中寫入什麼？
+    // 答案：您可以在大括號 ({}) 中寫入任何有效的 JavaScript 表達式。
+    // JavaScript 的表達式是可以評估為值的有效 JavaScript 代碼。
+    // 是表達式的有：變量，常量，字符串，數組，對象，函數，函數調用，計算等。
+    // 不是表達式的有：If 語句，For 循環，While 循環，Switch case，聲明等。
+    // Example:
+    const fullElementJsx = (
+        <div id="one">
+            <h1>Welcome, {user.name}</h1>
+            <p>You are {user.age} years old.</p>
+
+            {/* Note: It can render integer */}
+            <p>{123}</p>
+
+            {/* Note: It can render string, too */}
+            <p>{'Text'}</p>
+
+            {/* Note: It can render array, but it will treat each element as a child node to render. */}
+            <p>{[4, 5, 6]}</p>  {/*將各個元素當字串渲染*/}
+
+            {/* Note: It can render NaN and Infinity */}
+            <p>{NaN}, {Infinity}</p>
+
+            {/* Note: It will not directly render boolean, undefined, and null. */}
+            <p>"{true}{undefined}{null}"</p> {/*但無法渲染布林值、未定義和空值*/}
+
+            {/* Note: It could not directly render an object, it will raise an Error. 無法直接渲染物件，可以渲染物件的元素 */}
+            {/* <p>{user}</p> */}
+
+            {/* Note: It can render an object if you convert it to a string. */}
+            <p>{JSON.stringify(user)}</p> {/*將物件轉為字串渲染（寫出物件內所有data）*/}
+
+            {/* Note: It can also use an object at property */}
+            <p style={textStyle}>This is a text with style.</p>
+
+            {/* Note: It could not directly render a function, it will raise a Warning. */}
+            {/* <p>{() => {}}</p> */}  {/*在處理點擊事件會用到*/}
+
+            {/* Note: It will render the function return value */}
+            <p>{(() => { return "This is a function." })()}</p>
+
+            {/* Note: It makes we can directly declare a function inside the curly braces.
+                      So the function is mostly used to declare an event handler. */}
+            <button onClick={() => { alert("This is a function.") }}>Click Me!</button>
+            <button onClick={alert("This is a function.")}>Click Me!</button> {/*會直接執行，不會等到點擊事件發生，再重新整理的時候會發生*/}
+
+        </div>
+    );
+
+    // Render the element in the div#root
+    const divRoot = ReactDOM.createRoot(document.getElementById('root'));
+    divRoot.render(fullElementJsx);
+</script>
+
+</html>
