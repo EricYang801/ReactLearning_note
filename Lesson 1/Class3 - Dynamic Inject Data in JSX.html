@@ -84,7 +84,7 @@
             {/* Note: It makes we can directly declare a function inside the curly braces.
                       So the function is mostly used to declare an event handler. */}
             <button onClick={() => { alert("This is a function.") }}>Click Me!</button>
-            <button onClick={alert("This is a function.")}>Click Me!</button> {/*會直接執行，不會等到點擊事件發生，再重新整理的時候會發生*/}
+            {/*<button onClick={alert("This is a function.")}>Click Me!</button> 會直接執行，不會等到點擊事件發生，再重新整理的時候會發生*/}
 
         </div>
     );
