@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>List Rendering</title>
@@ -7,8 +8,9 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
+
 <body>
-<div id="root"></div>
+    <div id="root"></div>
 </body>
 <script type="text/babel">
     const users = [
@@ -31,6 +33,7 @@
             <h1>Users</h1>
             <ul>
                 {users.map((user, index) => {
+                    //maps有點像是for迴圈，會將陣列中的每一個元素都執行一次
                     // Note: Set a unique key for each element in the list will help React to identify which item has changed, added, or removed.
                     // This means that React will only re-render the changed, added, or removed item instead of re-rendering the whole list.
                     return <li key={index}>{user.name} - {user.age}</li>
@@ -42,4 +45,5 @@
     const divRoot = ReactDOM.createRoot(document.getElementById('root'));
     divRoot.render(div);
 </script>
+
 </html>
